@@ -21,3 +21,29 @@ Hola Hola soy yo
 	Foreign Key (ID_Estudiante) references Estudiantes(ID_Estudiantes),
 	Foreign Key ( Id_cursos) references cursos( ID_Cursos)
 	)
+
+
+
+Entidades a trabajar. 
+Categoria
+Productos 
+Proveedores 
+Ventas
+Compras
+Reportes
+Clientes
+
+
+Relaciones. 
+Producto a categoria
+Producto a proveedores
+Productos a informes (Tabla intermedia) 
+Compra a proveedor
+Compra a productos
+Venta a clientes
+Venta a productos 
+Informes a compra (Tabla intermedia) 
+informes a venta (Tabla intermedia) 
+
+
+
