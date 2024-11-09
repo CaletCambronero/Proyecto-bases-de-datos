@@ -1,2 +1,23 @@
 Hola aca deberia verse el codigo 
 Hola Hola soy yo
+
+
+
+	-- Crear una tabla
+	Create Table Cliente (
+	ID_Cliente Int Primary Key identity(1,1),
+	Nombre Varchar(100) Not Null,
+	Email Varchar (250) Unique Not Null
+	)
+
+
+	• Creamos la tabla intermedia ( Donde se almancenan las llaves foraneas. 
+	
+	Create Table Estudiantes_Cursos ( 
+	ID  Int primary key indertity (1,1),
+	Id_estudiante Int,
+	ID_cursos Int,
+	Fecha_Matricula date Default Getdate(),
+	Foreign Key (ID_Estudiante) references Estudiantes(ID_Estudiantes),
+	Foreign Key ( Id_cursos) references cursos( ID_Cursos)
+	)
