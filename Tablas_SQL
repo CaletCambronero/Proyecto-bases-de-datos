@@ -81,6 +81,7 @@ informes a venta (Tabla intermedia)
 Create Table Categorias ( 
 	idCategorias Int primary key indertity (1,1),
 	nombre varchar(100),
+	
 	)
 
 Create Table Productos ( 
@@ -89,10 +90,10 @@ Create Table Productos (
 	descripcion varchar(1000),
 	precio int, 
 	cantidadStock smallint,
-	idCompras int,
-	idVentas int,
-	Foreign Key (idCompras) references Compras(idCompras),
-	Foreign Key (idVentas) references Ventas(idVentas),
+	fkCompras int,
+	fkVentas int,
+	Foreign Key (fkCompras) references Compras(idCompras),
+	Foreign Key (fkVentas) references Ventas(idVentas),
 	)
 
 Create Table Proveedores ( 
