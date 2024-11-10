@@ -109,5 +109,30 @@ Create Table ventas (
 	contactoPrincipal varchar(100),
 	precio int, 
 	)
-.
+
+
+
+Create Table  Compras (
+ID_Compras Int Primary Key Identity(1,1),
+Cantidad Int ,
+productosAdqui varchar(100), 
+fechaCompra date,
+costo varchar (100),
+compraRealizada int
+)
+
+Create Table  Clientes (
+IDCliente Int Primary Key Identity(1,1),
+Nombre varchar (100),
+direccion varchar(500), 
+contacto varchar(100),
+)
+
+Create Table Informes (
+IdInformes Int Primary Key Identity(1,1),
+comprasRealizadas varchar (100),
+telefono varchar(100), 
+transaccionesRealizadas varchar(100),
+stockActual smallint
+)
 
