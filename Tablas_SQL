@@ -109,5 +109,5 @@ Create Table ventas (
 	contactoPrincipal varchar(100),
 	precio int, 
 	)
-
+.
 
