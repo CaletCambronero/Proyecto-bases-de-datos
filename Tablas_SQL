@@ -1,170 +1,103 @@
-Hola aca deberia verse el codigo 
-Hola Hola soy yo
-*/
-Tipos de datos: 
-tinyint: Se utiliza para almacenar valores numéricos que no superen 255.
-Ejemplo: Edad de una persona, como 19.
-
-smallint: Permite almacenar valores entre -32,768 y 32,767.
-Ejemplo: Cantidad de productos en inventario, como 400.
-
-int: Permite almacenar valores entre -2,147,483,648 y 2,147,483,647.
-Ejemplo: Número de usuarios en un sistema, como 1,000,000.
-
-decimal(p, s): Permite hasta 38 decimales, donde "p" es la precisión y "s" es la escala.
-Ejemplo: Peso de un objeto, como 100.55, donde se especifica decimal(5,2) (5 dígitos en total, 2 después del punto).
-
-char(x): Almacena una cantidad específica de caracteres, que debe ser exacta.
-Ejemplo: Estado de un pedido, como 'si' o 'no' para char(2).
-
-varchar(x): Almacena una cadena de caracteres de longitud variable, hasta un máximo especificado.
-Ejemplo: Nombre de usuario, como 'abc' o 'abcde' para varchar(5).
-
-date: Almacena fechas en formato YYYY-MM-dd.
-Ejemplo: Fecha de nacimiento, como 1990-01-01.
-
-time: Almacena horas en formato hh:mm.nnnnnnn
-Ejemplo: Hora de un evento, como 14:30:00.
-
-varbinary: Almacena valores binarios de longitud variable, comúnmente para datos encriptados.
-Ejemplo: Clave de seguridad en formato binario.
-
-BLOB: Almacena datos más complejos como video, audio o imágenes.
-Ejemplo: Una fotografía en un formato de imagen.
-/*
-
-
-	-- Crear una tabla
-	Create Table Cliente (
-	ID_Cliente Int Primary Key identity(1,1),
-	Nombre Varchar(100) Not Null,
-	Email Varchar (250) Unique Not Null
-	)
-
-
-	• Creamos la tabla intermedia ( Donde se almancenan las llaves foraneas. 
-	
-	Create Table Estudiantes_Cursos ( 
-	ID  Int primary key indertity (1,1),
-	Id_estudiante Int,
-	ID_cursos Int,
-	Fecha_Matricula date Default Getdate(),
-	Foreign Key (ID_Estudiante) references Estudiantes(ID_Estudiantes),
-	Foreign Key ( Id_cursos) references cursos( ID_Cursos)
-	)
-
-
-
-Entidades a trabajar. 
-Categoria
-Productos 
-Proveedores 
-Ventas
-Compras
-Reportes
-Clientes
-
-
-Relaciones. 
-Producto a categoria
-Producto a proveedores
-Productos a informes (Tabla intermedia) 
-Compra a proveedor
-Compra a productos
-Venta a clientes
-Venta a productos 
-Informes a compra (Tabla intermedia) 
-informes a venta (Tabla intermedia) 
-
-
-
-Create Table Categorias ( 
-	idCategorias Int primary key indertity (1,1),
+Create Table Categorias( 
+	idCategorias Int primary key identity(1,1),
 	nombre varchar(100),
 	fkProductos int, 
 	Foreign Key (fkProductos) references Productos(idProductos)
 	)
 
-Create Table Productos ( 
-	idProductos  Int primary key indertity (1,1),
-	nombre varchar(100),
-	descripcion varchar(1000),
-	precio int, 
-	cantidadStock smallint,
-	fkCompras int,
-	fkVentas int,
-	Foreign Key (fkCompras) references Compras(idCompras),
-	Foreign Key (fkVentas) references Ventas(idVentas),
+Create Table  Clientes (
+	idCliente Int Primary Key Identity(1,1),
+	Nombre varchar (100),
+	direccion varchar(500), 
+	contacto varchar(100)
 	)
 
-Create Table Proveedores ( 
-	idProveedores  Int primary key indertity (1,1),
+
+
+Create Table ventas ( 
+	idVentas  Int primary key identity (1,1),
+	cantidad int,
+	contactoPrincipal varchar(100),
+	precio int,
+	fkCliente int,
+	Foreign Key (fkCliente) references Clientes(idCliente)
+	)
+
+	Create Table Proveedores( 
+	idProveedores  Int primary key identity(1,1),
 	nombre varchar(100),
 	direccion varchar(500),
 	telefono varchar(100),
 	contactoPrincipal varchar(100),
 	fkProductos int,
-	Foreign Key (fkProductos) references Productos(idProductos),
+	Foreign Key (fkProductos) references Productos(idProductos)
 	)
 
-Create Table ventas ( 
-	idVentas  Int primary key indertity (1,1),
-	cantidad int,
-	contactoPrincipal varchar(100),
+	Create Table Compras(
+	idCompras Int Primary Key Identity(1,1),
+	Cantidad Int ,
+	productosAdqui varchar(100), 
+	fechaCompra date,
+	costo varchar (100),
+	compraRealizada int,
+	fkProveedores  Int,
+	Foreign Key (fkProveedores) references Proveedores(idProveedores)
+	)
+
+
+Create Table Productos( 
+	idProductos  Int primary key identity(1,1),
+	nombre varchar(100),
+	descripcion varchar(1000),
 	precio int, 
+	cantidadStock smallint,
+	--fkCompras int,
+	fkVentas int,
+	--Foreign Key (fkCompras) references Compras(idCompras),
+	Foreign Key (fkVentas) references Ventas(idVentas),
 	)
 
-
-
-Create Table  Compras (
-ID_Compras Int Primary Key Identity(1,1),
-Cantidad Int ,
-productosAdqui varchar(100), 
-fechaCompra date,
-costo varchar (100),
-compraRealizada int,
-fkProveedores  Int,
-Foreign Key (fkProveedores) references Proveedores(idProveedores)
-)
-
-Create Table  Clientes (
-IDCliente Int Primary Key Identity(1,1),
-Nombre varchar (100),
-direccion varchar(500), 
-contacto varchar(100),
-)
+	
 
 Create Table Informes (
-IdInformes Int Primary Key Identity(1,1),
-comprasRealizadas varchar (100),
-telefono varchar(100), 
-transaccionesRealizadas varchar(100),
-stockActual smallint
-fkCompras  Int,
-Foreign Key (fkCompras) references Compras(ID_Compras)
-)
+	idInformes Int Primary Key Identity(1,1),
+	comprasRealizadas varchar (100),
+	telefono varchar(100), 
+	transaccionesRealizadas varchar(100),
+	stockActual smallint,
+	fkCompras  Int,
+	Foreign Key (fkCompras) references Compras(idCompras)
+	)
 
 Create Table inVentas (
-IdinVentas Int Primary Key Identity(1,1),
-fkVentas int,
-fkInformes int,
-Foreign Key (fkVentas) references Ventas(idVentas),
-Foreign Key (fkInformes) references informes(idinformes),
-)
+	idinVentas Int Primary Key Identity(1,1),
+	fkVentas int,
+	fkInformes int,
+	Foreign Key (fkVentas) references Ventas(idVentas),
+	Foreign Key (fkInformes) references informes(idinformes),
+	)
 
 Create Table inCompras (
-IdinVentas Int Primary Key Identity(1,1),
-fkCompras int, 
-fkInformes int,
-Foreign Key (fkCompras) references Compras(idCompras),
-Foreign Key (fkInformes) references informes(idinformes),
-)
+	idinCompras Int Primary Key Identity(1,1),
+	fkCompras int, 
+	fkInformes int,
+	Foreign Key (fkCompras) references Compras(idCompras),
+	Foreign Key (fkInformes) references informes(idinformes),
+	)
 
 
 Create Table inProductos (
-IdinProductos Int Primary Key Identity(1,1),
-fkProductos int, 
-fkInformes int,
-Foreign Key (fkProductos) references productos(idProductos),
-Foreign Key (fkInformes) references informes(idinformes),
-)
+	idinProductos Int Primary Key Identity(1,1),
+	fkProductos int, 
+	fkInformes int,
+	Foreign Key (fkProductos) references productos(idProductos),
+	Foreign Key (fkInformes) references informes(idinformes),
+	)
+
+	-- Agregar la conexion faltante
+	ALTER TABLE Productos
+	ADD fkCompras INT;
+
+	ALTER TABLE Productos
+	ADD CONSTRAINT FK_Productos_Compras
+	FOREIGN KEY (fkCompras) REFERENCES Compras(idCompras);
