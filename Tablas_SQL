@@ -119,9 +119,9 @@ Cantidad Int ,
 productosAdqui varchar(100), 
 fechaCompra date,
 costo varchar (100),
-compraRealizada int
+compraRealizada int,
 fkProveedores  Int,
-Foreign Key (idProveedores) references Proveedores(idProveedores)
+Foreign Key (fkProveedores) references Proveedores(idProveedores)
 )
 
 Create Table  Clientes (
