@@ -88,7 +88,11 @@ Create Table Productos (
 	nombre varchar(100),
 	descripcion varchar(1000),
 	precio int, 
-	cantidadStock smallint
+	cantidadStock smallint,
+	idCompras int,
+	idVentas int,
+	Foreign Key (idCompras) references Compras(idCompras),
+	Foreign Key (idVentas) references Ventas(idVentas),
 	)
 
 Create Table Proveedores ( 
