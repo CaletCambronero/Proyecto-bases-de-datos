@@ -81,7 +81,8 @@ informes a venta (Tabla intermedia)
 Create Table Categorias ( 
 	idCategorias Int primary key indertity (1,1),
 	nombre varchar(100),
-	
+	fkProductos int, 
+	Foreign Key (fkProductos) references Productos(idProductos)
 	)
 
 Create Table Productos ( 
@@ -101,7 +102,9 @@ Create Table Proveedores (
 	nombre varchar(100),
 	direccion varchar(500),
 	telefono varchar(100),
-	contactoPrincipal varchar(100)
+	contactoPrincipal varchar(100),
+	fkProductos int,
+	Foreign Key (fkProductos) references Productos(idProductos),
 	)
 
 Create Table ventas ( 
@@ -141,3 +144,27 @@ fkCompras  Int,
 Foreign Key (fkCompras) references Compras(ID_Compras)
 )
 
+Create Table inVentas (
+IdinVentas Int Primary Key Identity(1,1),
+fkVentas int,
+fkInformes int,
+Foreign Key (fkVentas) references Ventas(idVentas),
+Foreign Key (fkInformes) references informes(idinformes),
+)
+
+Create Table inCompras (
+IdinVentas Int Primary Key Identity(1,1),
+fkCompras int, 
+fkInformes int,
+Foreign Key (fkCompras) references Compras(idCompras),
+Foreign Key (fkInformes) references informes(idinformes),
+)
+
+
+Create Table inProductos (
+IdinProductos Int Primary Key Identity(1,1),
+fkProductos int, 
+fkInformes int,
+Foreign Key (fkProductos) references productos(idProductos),
+Foreign Key (fkInformes) references informes(idinformes),
+)
