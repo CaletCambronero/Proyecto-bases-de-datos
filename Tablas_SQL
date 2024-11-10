@@ -88,7 +88,22 @@ Create Table Productos (
 	nombre varchar(100),
 	descripcion varchar(1000),
 	precio int, 
-	cantidadStock 
-	
+	cantidadStock smallint
 	)
-1
+
+Create Table Proveedores ( 
+	idProveedores  Int primary key indertity (1,1),
+	nombre varchar(100),
+	direccion varchar(500),
+	telefono varchar(100),
+	contactoPrincipal varchar(100)
+	)
+
+Create Table ventas ( 
+	idVentas  Int primary key indertity (1,1),
+	cantidad int,
+	contactoPrincipal varchar(100),
+	precio int, 
+	)
+
+
