@@ -137,5 +137,7 @@ comprasRealizadas varchar (100),
 telefono varchar(100), 
 transaccionesRealizadas varchar(100),
 stockActual smallint
+fkCompras  Int,
+Foreign Key (fkCompras) references Compras(ID_Compras)
 )
 
