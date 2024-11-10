@@ -1,6 +1,37 @@
 Hola aca deberia verse el codigo 
 Hola Hola soy yo
+*/
+Tipos de datos: 
+tinyint: Se utiliza para almacenar valores numéricos que no superen 255.
+Ejemplo: Edad de una persona, como 19.
 
+smallint: Permite almacenar valores entre -32,768 y 32,767.
+Ejemplo: Cantidad de productos en inventario, como 400.
+
+int: Permite almacenar valores entre -2,147,483,648 y 2,147,483,647.
+Ejemplo: Número de usuarios en un sistema, como 1,000,000.
+
+decimal(p, s): Permite hasta 38 decimales, donde "p" es la precisión y "s" es la escala.
+Ejemplo: Peso de un objeto, como 100.55, donde se especifica decimal(5,2) (5 dígitos en total, 2 después del punto).
+
+char(x): Almacena una cantidad específica de caracteres, que debe ser exacta.
+Ejemplo: Estado de un pedido, como 'si' o 'no' para char(2).
+
+varchar(x): Almacena una cadena de caracteres de longitud variable, hasta un máximo especificado.
+Ejemplo: Nombre de usuario, como 'abc' o 'abcde' para varchar(5).
+
+date: Almacena fechas en formato YYYY-MM-dd.
+Ejemplo: Fecha de nacimiento, como 1990-01-01.
+
+time: Almacena horas en formato hh:mm.nnnnnnn
+Ejemplo: Hora de un evento, como 14:30:00.
+
+varbinary: Almacena valores binarios de longitud variable, comúnmente para datos encriptados.
+Ejemplo: Clave de seguridad en formato binario.
+
+BLOB: Almacena datos más complejos como video, audio o imágenes.
+Ejemplo: Una fotografía en un formato de imagen.
+/*
 
 
 	-- Crear una tabla
@@ -47,3 +78,16 @@ informes a venta (Tabla intermedia)
 
 
 
+Create Table Categorias ( 
+	idCategorias Int primary key indertity (1,1),
+	nombre varchar(100),
+	)
+
+Create Table Productos ( 
+	idProductos  Int primary key indertity (1,1),
+	nombre varchar(100),
+	descripcion varchar(1000),
+	precio int, 
+	cantidadStock 
+	
+	)
