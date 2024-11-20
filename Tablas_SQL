@@ -149,5 +149,23 @@ VALUES
 (2, 2),
 (3, 3);
 
+PROCEDIMIENTO ALMACENADO
+CREATE PROCEDURE sp_InsertNuevoInforme
+    @ComprasRealizadas VARCHAR(100),
+    @Telefono VARCHAR(100),
+    @TransaccionesRealizadas VARCHAR(100),
+    @StockActual SMALLINT
+AS
+BEGIN
+    -- Inserta un nuevo registro en la tabla Informes
+    INSERT INTO Informes (comprasRealizadas, telefono, transaccionesRealizadas, stockActual)
+    VALUES (@ComprasRealizadas, @Telefono, @TransaccionesRealizadas, @StockActual);
 
+    PRINT 'Informe insertado correctamente.';
+END;
+EXEC sp_InsertNuevoInforme 
+    @ComprasRealizadas = 'Compra de laptops',
+    @Telefono = '123456789',
+    @TransaccionesRealizadas = '3 transacciones',
+    @StockActual = 50;
 
