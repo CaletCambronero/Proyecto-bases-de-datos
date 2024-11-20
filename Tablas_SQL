@@ -169,3 +169,21 @@ EXEC sp_InsertNuevoInforme
     @TransaccionesRealizadas = '3 transacciones',
     @StockActual = 50;
 
+PROCEDIMIENTO ALMACENADO #2 
+create procedure AgregarProductos
+@nombre varchar(100),
+@descripcion varchar(100),
+@precio int,
+@cantidadStock smallint 
+
+AS
+
+Begin
+
+INSERT INTO Productos(nombre, descripcion, precio, cantidadStock)
+VALUES (@nombre, @descripcion, @precio, @cantidadStock)
+
+End
+
+
+execute AgregarProductos 'Laptop', 'Laptop de alto rendimiento', 1500, 10
