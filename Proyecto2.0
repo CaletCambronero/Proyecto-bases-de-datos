@@ -1,0 +1,255 @@
+create database ProyectoPulido2
+
+Create Table Categorias( 
+	idCategorias Int primary key identity(1,1),
+	nombre varchar(100),
+	)
+
+Create Table  Clientes (
+	idCliente Int Primary Key Identity(1,1),
+	Nombre varchar (100),
+	direccion varchar(500), 
+	contacto varchar(100)
+	)
+
+
+
+Create Table ventas ( 
+	idVentas  Int primary key identity (1,1),
+	cantidad int,
+	contactoPrincipal varchar(100),
+	precio decimal (10, 2), -- Lo cambie pues los precios pueden tener decimales y es mejor que un int para mayor precision
+	fkCliente int,
+	Foreign Key (fkCliente) references Clientes(idCliente)
+	)
+
+	Create Table Proveedores( 
+	idProveedores  Int primary key identity(1,1),
+	nombre varchar(100),
+	direccion varchar(500),
+	telefono varchar(100),
+	contactoPrincipal varchar(100),
+	)
+
+	Create Table Compras(
+	idCompras Int Primary Key Identity(1,1),
+	Cantidad Int ,
+	productosAdqui varchar(100), 
+	fechaCompra date Default Getdate(),
+	costo decimal (10, 2), -- Lo cambie pues los precios pueden tener decimales y es mejor que un int para mayor precision
+	compraRealizada int,
+	fkProveedores  Int,
+	Foreign Key (fkProveedores) references Proveedores(idProveedores)
+	)
+
+
+Create Table Productos( 
+	idProductos  Int primary key identity(1,1),
+	nombre varchar(100),
+	descripcion varchar(1000),
+	precio decimal (10, 2), -- Lo cambie pues los precios pueden tener decimales y es mejor que un int para mayor precision 
+	cantidadStock smallint,
+	fkcategorias int,
+	fkcompras int, 
+	Foreign Key (fkcategorias) references categorias(idCategorias),
+	Foreign Key (fkcompras) references compras(idCompras)
+	)
+
+	
+
+create Table Informes (
+	idInformes Int Primary Key Identity(1,1),
+	comprasRealizadas varchar (100),
+	telefono varchar(100), 
+	transaccionesRealizadas date Default Getdate(),
+	stockActual smallint,
+	fkCompras Int,
+	fkVentas INT,                  
+    fkProductos INT, 
+	Foreign Key (fkCompras) references Compras(idCompras),
+	Foreign Key (fkVentas) references Ventas(idventas),  
+    Foreign Key (fkProductos) references Productos(idProductos),
+	)
+	
+
+Create Table inVentas (
+	idinVentas Int Primary Key Identity(1,1),
+	fkVentas int,
+	fkInformes int,
+	Foreign Key (fkVentas) references Ventas(idVentas),
+	Foreign Key (fkInformes) references informes(idinformes),
+	)
+
+Create Table inCompras (
+	idinCompras Int Primary Key Identity(1,1),
+	fkCompras int, 
+	fkInformes int,
+	Foreign Key (fkCompras) references Compras(idCompras),
+	Foreign Key (fkInformes) references informes(idinformes),
+	)
+
+
+Create Table inProductos (
+	idinProductos Int Primary Key Identity(1,1),
+	fkProductos int, 
+	fkInformes int,
+	Foreign Key (fkProductos) references productos(idProductos),
+	Foreign Key (fkInformes) references informes(idinformes),
+	)
+
+--Tablas adicionales necesarias para cumplir necesidades relacionales.
+
+CREATE TABLE Productos_Venta (
+    idProductoVenta INT PRIMARY KEY IDENTITY(1,1),
+    fkProducto INT,  
+    fkVenta INT,  
+    cantidad INT, 
+    FOREIGN KEY (fkProducto) REFERENCES Productos(idProductos),
+    FOREIGN KEY (fkVenta) REFERENCES Ventas(idVentas)
+)
+
+CREATE TABLE Proveedores_Productos (
+    idProveedorProducto INT PRIMARY KEY IDENTITY(1,1),
+    fkProveedor INT,  
+    fkProducto INT,  
+    FOREIGN KEY (fkProveedor) REFERENCES Proveedores(idProveedores),
+    FOREIGN KEY (fkProducto) REFERENCES Productos(idProductos)
+)
+
+CREATE TABLE Productos_Compra (
+    idProductoCompra INT PRIMARY KEY IDENTITY(1,1),
+    fkProducto INT,  
+    fkCompra INT,  
+    cantidad INT,  
+    FOREIGN KEY (fkProducto) REFERENCES Productos(idProductos),
+    FOREIGN KEY (fkCompra) REFERENCES Compras(idCompras)
+)
+
+
+------------------------------------------------------------------ Inicio de insercion de datos ----------------------------------------------------------------
+
+--Insertar las categorias de los productos. 
+insert into Categorias(nombre)
+values 
+('Parlantes'),
+('Laptops'),
+('Celulares')
+
+select * from Categorias
+
+
+--Insertar proveedores de productos. 
+INSERT INTO Proveedores (nombre, direccion, telefono, contactoPrincipal)
+VALUES 
+('Parlantes', '123 Calle Principal, Ciudad de México', '555-1234', 'Carlos Martínez'), 
+('Laptops', '456 Avenida Sonido, Monterrey', '555-5678', 'Laura Gómez'),  
+('Celulares', '789 Calle Manzana, Ciudad de México', '555-8765', 'Pedro López')
+
+select * from Proveedores
+
+--Insertar clientes 
+INSERT INTO Clientes (Nombre, direccion, contacto)
+VALUES 
+('Juan Pérez', 'juan.perez@gmail.com', '555-1234'),
+('María López', 'maria.lopez@gmail.com', '555-5678'),
+('Pedro Gómez', 'pedro.gomez@gmail.com', '555-8765');
+
+select * from Clientes
+
+--Insertar compras a proveedores
+INSERT INTO Compras (Cantidad, productosAdqui, costo, compraRealizada, fkProveedores)
+VALUES
+(10, 'Parlante JBL Flip 5', 100000.00, 1, 1),  -- Compra de parlantes, proveedor JBL
+(10, 'Laptop Dell Inspiron 14', 120000.00, 1, 2),  -- Compra de laptops, proveedor Dell
+(10, 'Smartphone iPhone 14', 80000.00, 1, 3);  -- Compra de smartphones, proveedor Apple
+
+select * from Compras
+
+--Insertar producto
+INSERT INTO Productos (nombre, descripcion, precio, cantidadStock, fkcategorias, fkcompras)
+VALUES 
+('Parlante JBL Flip 5', 'Parlante portátil Bluetooth con sonido de alta calidad', 10000.00, 10, 1, 1),  -- Parlante JBL Flip 5, categoría 1, compra de proveedor JBL
+('Laptop Dell Inspiron 14', 'Laptop portátil de 14 pulgadas, procesador Intel Core i5', 12000.00, 10, 2, 2),  -- Laptop Dell Inspiron 14, categoría 2, compra de proveedor Dell
+('Smartphone iPhone 14', 'Smartphone iPhone 14, 128GB, color negro', 8000.00, 10, 3, 3);  -- Smartphone iPhone 14, categoría 3, compra de proveedor Apple
+
+select * from Productos
+
+--Insertar ventas
+INSERT INTO Ventas (cantidad, contactoPrincipal, precio, fkCliente)
+VALUES 
+(2, 'juan.perez@gmail.com', 20000.00, 1),  -- Juan Pérez compra 2 Parlantes JBL Flip 5
+(1, 'maria.lopez@gmail.com', 12000.00, 2),  -- María López compra 1 Laptop Dell Inspiron 14
+(3, 'pedro.gomez@gmail.com', 24000.00, 3);   -- Pedro Gómez compra 3 Smartphones iPhone 14
+
+select * from ventas
+
+-- Insertar informes ventas 
+INSERT INTO Informes (comprasRealizadas, telefono, transaccionesRealizadas, stockActual, fkVentas, fkProductos)
+VALUES 
+('2 Parlantes JBL Flip 5', '555-1234', '2024-11-19', 8, 1, 1),  -- Informe de venta para Juan Pérez (Parlantes JBL Flip 5)
+('1 Laptop Dell Inspiron 14', '555-5678', '2024-11-19', 9, 2, 2),  -- Informe de venta para María López (Laptop Dell Inspiron 14)
+('3 Smartphones iPhone 14', '555-8765', '2024-11-19', 7, 3, 3);   -- Informe de venta para Pedro Gómez (Smartphone iPhone 14)
+
+select * from Informes
+
+--Insertar informes compras
+INSERT INTO Informes (comprasRealizadas, telefono, transaccionesRealizadas, stockActual, fkCompras, fkProductos)
+VALUES 
+('10 Parlantes JBL Flip 5', '555-9988', '2024-11-19', 10, 1, 1),  -- Informe de compra para Parlante JBL Flip 5 (Proveedor JBL)
+('10 Laptop Dell Inspiron 14', '555-2233', '2024-11-19', 10, 2, 2),  -- Informe de compra para Laptop Dell Inspiron 14 (Proveedor Dell)
+('10 Smartphones iPhone 14', '555-3344', '2024-11-19', 10, 3, 3);   -- Informe de compra para Smartphone iPhone 14 (Proveedor Apple)
+
+select * from Informes
+
+-- Relacionar ventas con informes en inVentas
+INSERT INTO inVentas (fkVentas, fkInformes)
+VALUES 
+(1, 1),  -- Venta 1 asociada con Informe 1
+(2, 2),  -- Venta 2 asociada con Informe 2
+(3, 3);  -- Venta 3 asociada con Informe 3
+
+-- Relacionar compras con informes en inCompras
+INSERT INTO inCompras (fkCompras, fkInformes)
+VALUES 
+(1, 1),  -- Compra 1 asociada con Informe 1
+(2, 2),  -- Compra 2 asociada con Informe 2
+(3, 3);  -- Compra 3 asociada con Informe 3
+
+-- Relacionar productos con informes en inProductos
+INSERT INTO inProductos (fkProductos, fkInformes)
+VALUES 
+(1, 1),  -- Producto 1 (Laptop HP) asociado con Informe 1
+(2, 2),  -- Producto 2 (MacBook Pro) asociado con Informe 2
+(3, 3);  -- Producto 3 (Samsung Galaxy) asociado con Informe 3
+
+--Insertar Productos_Venta
+INSERT INTO Productos_Venta (fkProducto, fkVenta, cantidad)
+VALUES 
+(1,1,2),
+(2,2,1),
+(3,3,3)
+
+Select * from Productos_Venta
+
+select * from ventas
+select * from Productos
+
+--Insertar Productos_Compra
+Insert into Productos_Compra (fkProducto, fkCompra, cantidad)
+values
+(1,1,10),
+(2,2,10),
+(3,3,10)
+
+select * from productos_compra 
+
+--Insertar Proveedor_productos 
+Insert into Proveedores_Productos ( fkProducto, fkProveedor )
+values 
+(1,1),
+(2,2),
+(3,3) 
+
+select * from Proveedores_Productos
+
+
