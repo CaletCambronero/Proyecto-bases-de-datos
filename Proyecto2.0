@@ -289,15 +289,13 @@ select * from Compras
 
 INSERT INTO Productos (nombre, descripcion, precio, cantidadStock, fkcategorias, fkcompras)
 VALUES 
-('Bose SoundLink Revolve', 'Parlante Bluetooth de alta calidad con sonido 360°', 75000.00, 50, 1, 4),  
-('Dell Inspiron 15', 'Laptop Dell Inspiron 15 con procesador Intel Core i7 y 16GB de RAM', 50000.00, 100, 2, 5),  
-('JBL Flip 5', 'Parlante portátil Bluetooth de alta calidad con sonido de 360°', 20000.00, 20, 1, 6), 
-('HP Pavilion x360', 'Laptop convertible HP Pavilion x360 con procesador Intel Core i5', 12000.00, 10, 2, 7),  
-('Samsung Galaxy S21', 'Smartphone Samsung Galaxy S21 con pantalla de 6.2" y 128GB de almacenamiento', 12000.00, 30, 3, 8),
-('Apple iPhone 13', 'Smartphone Apple iPhone 13 con 128GB de almacenamiento y cámara dual', 9000.00, 15, 3, 9), 
-('Sony SRS-XB43', 'Parlante portátil Bluetooth Sony con graves profundos y resistente al agua', 3200.00, 40, 1, 10),
-('MacBook Pro 13"', 'Laptop Apple MacBook Pro de 13 pulgadas con procesador M1', 37500.00, 25, 2, 11),
-('Xiaomi Redmi Note 10', 'Smartphone Xiaomi Redmi Note 10 con pantalla AMOLED y 48MP de cámara', 16000.00, 8, 3, 12),
-('Anker Soundcore', 'Parlante Bluetooth Anker Soundcore con sonido de 360° y batería de larga duración', 4200.00, 60, 1, 13);
-
-select * from Productos
+('Bose SoundLink Revolve', 'Parlante Bluetooth de alta calidad con sonido 360°', 1500.00, 50, 1, 4),  
+('Dell Inspiron 15', 'Laptop Dell Inspiron 15 con procesador Intel Core i7 y 16GB de RAM', 500.00, 100, 2, 5),  
+('JBL Flip 5', 'Parlante portátil Bluetooth de alta calidad con sonido de 360°', 1000.00, 20, 1, 6), 
+('HP Pavilion x360', 'Laptop convertible HP Pavilion x360 con procesador Intel Core i5', 1200.00, 10, 2, 7),  
+('Samsung Galaxy S21', 'Smartphone Samsung Galaxy S21 con pantalla de 6.2" y 128GB de almacenamiento', 400.00, 30, 3, 8),
+('Apple iPhone 13', 'Smartphone Apple iPhone 13 con 128GB de almacenamiento y cámara dual', 600.00, 15, 3, 9), 
+('Sony SRS-XB43', 'Parlante portátil Bluetooth Sony con graves profundos y resistente al agua', 80.00, 40, 1, 10),
+('MacBook Pro 13"', 'Laptop Apple MacBook Pro de 13 pulgadas con procesador M1', 1500.00, 25, 2, 11),
+('Xiaomi Redmi Note 10', 'Smartphone Xiaomi Redmi Note 10 con pantalla AMOLED y 48MP de cámara', 2000.00, 8, 3, 12),
+('Anker Soundcore', 'Parlante Bluetooth Anker Soundcore con sonido de 360° y batería de larga duración', 70.00, 60, 1, 13);
