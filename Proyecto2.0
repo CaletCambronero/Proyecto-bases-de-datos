@@ -252,4 +252,52 @@ values
 
 select * from Proveedores_Productos
 
+------------------------------------------------------Continuacion de insercion de datos-------------------------------------------------------------
+INSERT INTO Clientes (Nombre, direccion, contacto)
+VALUES 
+('Carlos Jiménez', 'Calle Flores #123, Ciudad Jardín', 'carlos.jimenez@example.com'),
+('María Fernanda López', 'Av. Principal #456, Zona Norte', 'maria.lopez@example.com'),
+('José Antonio Pérez', 'Plaza Central #78, Distrito Comercial', 'jose.perez@example.com'),
+('Ana Rodríguez', 'Km 3 Carretera Este, Sector Residencial', 'ana.rodriguez@example.com'),
+('Luis Torres', 'Edificio Solar #21, Centro Urbano', 'luis.torres@example.com'),
+('Sofía Martínez', 'Calle Comercio #67, Barrio Antiguo', 'sofia.martinez@example.com'),
+('Juan Carlos García', 'Zona Sur #12, Distrito Empresarial', 'juan.garcia@example.com'),
+('Lucía Hernández', 'Av. Norte #98, Sector Industrial', 'lucia.hernandez@example.com'),
+('Pedro Castillo', 'Calle Luna #34, Ciudad Nueva', 'pedro.castillo@example.com'),
+('Elena Díaz', 'Plaza Arboleda #90, Residencial Verde', 'elena.diaz@example.com');
 
+select * from Clientes
+
+
+
+
+Insert into Compras (Cantidad, productosAdqui, costo, compraRealizada, fkProveedores)
+Values (50, 'Bose SoundLink Revolve', 75000.00, 1, 1),
+(100, 'Dell Inspiron 15', 50000.00, 1, 2),
+(20, 'JBL Flip 5', 20000.00, 1, 1),
+(10, 'HP Pavilion x360', 12000.00, 1, 2),
+(30, 'Samsung Galaxy S21', 12000.00, 1, 3),
+(15, 'Apple iPhone 13', 9000.00, 1, 3),
+(40, 'Sony SRS-XB43', 3200.00, 1, 1),
+(25, 'MacBook Pro 13"', 37500.00, 1, 2),
+(8, 'Xiaomi Redmi Note 10', 16000.00, 1, 3),
+(60, 'Anker Soundcore', 4200.00, 1, 1);
+
+select * from Compras
+
+
+
+INSERT INTO Productos (nombre, descripcion, precio, cantidadStock, fkcategorias, fkcompras)
+VALUES 
+('Bose SoundLink Revolve', 'Parlante Bluetooth de alta calidad con sonido 360°', 75000.00, 50, 1, 4),  
+('Dell Inspiron 15', 'Laptop Dell Inspiron 15 con procesador Intel Core i7 y 16GB de RAM', 50000.00, 100, 2, 5),  
+('JBL Flip 5', 'Parlante portátil Bluetooth de alta calidad con sonido de 360°', 20000.00, 20, 1, 6), 
+('HP Pavilion x360', 'Laptop convertible HP Pavilion x360 con procesador Intel Core i5', 12000.00, 10, 2, 7),  
+('Samsung Galaxy S21', 'Smartphone Samsung Galaxy S21 con pantalla de 6.2" y 128GB de almacenamiento', 12000.00, 30, 3, 8),
+('Apple iPhone 13', 'Smartphone Apple iPhone 13 con 128GB de almacenamiento y cámara dual', 9000.00, 15, 3, 9), 
+('Sony SRS-XB43', 'Parlante portátil Bluetooth Sony con graves profundos y resistente al agua', 3200.00, 40, 1, 10),
+('MacBook Pro 13"', 'Laptop Apple MacBook Pro de 13 pulgadas con procesador M1', 37500.00, 25, 2, 11),
+('Xiaomi Redmi Note 10', 'Smartphone Xiaomi Redmi Note 10 con pantalla AMOLED y 48MP de cámara', 16000.00, 8, 3, 12),
+('Anker Soundcore', 'Parlante Bluetooth Anker Soundcore con sonido de 360° y batería de larga duración', 4200.00, 60, 1, 13);
+
+select * from Productos
