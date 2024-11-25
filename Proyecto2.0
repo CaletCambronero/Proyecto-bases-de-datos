@@ -253,23 +253,26 @@ values
 select * from Proveedores_Productos
 
 ------------------------------------------------------Continuacion de insercion de datos-------------------------------------------------------------
+
+------------------Insert de las CLIENTES-----------------
+
 INSERT INTO Clientes (Nombre, direccion, contacto)
 VALUES 
-('Carlos Jiménez', 'Calle Flores #123, Ciudad Jardín', 'carlos.jimenez@example.com'),
-('María Fernanda López', 'Av. Principal #456, Zona Norte', 'maria.lopez@example.com'),
-('José Antonio Pérez', 'Plaza Central #78, Distrito Comercial', 'jose.perez@example.com'),
-('Ana Rodríguez', 'Km 3 Carretera Este, Sector Residencial', 'ana.rodriguez@example.com'),
-('Luis Torres', 'Edificio Solar #21, Centro Urbano', 'luis.torres@example.com'),
-('Sofía Martínez', 'Calle Comercio #67, Barrio Antiguo', 'sofia.martinez@example.com'),
-('Juan Carlos García', 'Zona Sur #12, Distrito Empresarial', 'juan.garcia@example.com'),
-('Lucía Hernández', 'Av. Norte #98, Sector Industrial', 'lucia.hernandez@example.com'),
-('Pedro Castillo', 'Calle Luna #34, Ciudad Nueva', 'pedro.castillo@example.com'),
-('Elena Díaz', 'Plaza Arboleda #90, Residencial Verde', 'elena.diaz@example.com');
+('Carlos Jiménez', 'carlos.jimenez@example.com', '123-456-7890'),
+('María Fernanda López', 'maria.lopez@example.com', '234-567-8901'),
+('José Antonio Pérez', 'jose.perez@example.com', '345-678-9012'),
+('Ana Rodríguez', 'ana.rodriguez@example.com', '456-789-0123'),
+('Luis Torres', 'luis.torres@example.com', '567-890-1234'),
+('Sofía Martínez', 'sofia.martinez@example.com', '678-901-2345'),
+('Juan Carlos García', 'juan.garcia@example.com', '789-012-3456'),
+('Lucía Hernández', 'lucia.hernandez@example.com', '890-123-4567'),
+('Pedro Castillo', 'pedro.castillo@example.com', '901-234-5678'),
+('Elena Díaz', 'elena.diaz@example.com', '012-345-6789');
 
 select * from Clientes
 
 
-
+------------------Insert de las COMPRAS-----------------
 
 Insert into Compras (Cantidad, productosAdqui, costo, compraRealizada, fkProveedores)
 Values (50, 'Bose SoundLink Revolve', 75000.00, 1, 1),
@@ -285,7 +288,7 @@ Values (50, 'Bose SoundLink Revolve', 75000.00, 1, 1),
 
 select * from Compras
 
-
+------------------Insert de los PRODUCTOS-----------------
 
 INSERT INTO Productos (nombre, descripcion, precio, cantidadStock, fkcategorias, fkcompras)
 VALUES 
@@ -300,8 +303,42 @@ VALUES
 ('Xiaomi Redmi Note 10', 'Smartphone Xiaomi Redmi Note 10 con pantalla AMOLED y 48MP de cámara', 2000.00, 8, 3, 12),
 ('Anker Soundcore', 'Parlante Bluetooth Anker Soundcore con sonido de 360° y batería de larga duración', 70.00, 60, 1, 13);
 
+------------------Insert de las VENTAS-----------------
 
+INSERT INTO Ventas (cantidad, contactoPrincipal, precio, fkCliente)
+VALUES 
+(2, 'carlos.jimenez@example.com', 3000.00, 4),  -- Carlos Jiménez compra 2 Parlantes Bose SoundLink Revolve
+(1, 'maria.lopez@example.com', 500.00, 5), 
+(3, 'jose.perez@example.com', 3000.00, 6), 
+(1, 'ana.rodriguez@example.com', 1200.00, 7), 
+(5, 'luis.torres@example.com', 2000.00, 8), 
+(2, 'sofia.martinez@example.com', 2400.00, 9),  
+(4, 'juan.garcia@example.com', 320.00, 10)
 
+select * from ventas
+
+------------------Informes de venta de productos---------------------
+INSERT INTO Informes(comprasRealizadas, telefono, transaccionesRealizadas, stockActual, fkVentas, fkProductos)
+VALUES
+('2 Bose SoundLink Revolve', '123-456-7890', '2024-11-24', 48, 4, 8), -- Habia un problema con los registros de FK productos por lo cual tuve que iniciar la secuencia en 8 
+('1 Dell Inspiron 15', '234-567-8901', '2024-11-24', 99, 5, 9),
+('3 JBL Flip 5', '345-678-9012', '2024-11-24', 17, 6, 10),
+('1 HP Pavilion x360', '456-789-0123', '2024-11-24', 9, 7, 11),
+('5 Samsung Galaxy S21', '567-890-1234', '2024-11-24', 25, 8, 12),   
+('2 Apple iPhone 13', '678-901-2345', '2024-11-24', 13, 9, 13), 
+('4 Sony SRS-XB43', '789-012-3456', '2024-11-24', 56, 10, 14);
+
+----------------Informes de Productos_Ventas---------------------
+--Insertar Productos_Venta
+INSERT INTO Productos_Venta (fkProducto, fkVenta, cantidad)
+VALUES 
+(8,4,2),
+(9,5,1),
+(10,6,3),
+(11,7,1),
+(12,8,5),
+(13,9,2),
+(14,10,4)
 
 
 *********Edicion de datos de Clientes*****************
