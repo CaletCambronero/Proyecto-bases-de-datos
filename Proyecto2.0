@@ -367,3 +367,18 @@ Las 3 lineas de inicio las cambia con este:
 UPDATE Clientes
 SET direccion = 'pedro.gomez@gmail.com'
 where idCliente = 3
+
+
+
+*********
+
+INSERT INTO Informes (comprasRealizadas, telefono, transaccionesRealizadas, stockActual, fkCompras, fkProductos)
+VALUES
+('50 Bose SoundLink Revolve', '555-1234', '2024-11-24', 50, 4, 1), 
+('100 Laptop Dell Inspiron 15', '555-5678', '2024-11-24', 8, 5, 2),  
+('20 JBL Flip 5', '555-4455', '2024-11-2024', 20, 6, 1), 
+('10 HP Pavilion x360', '555-5678', '2024-11-2024', 20, 7, 2),
+('30 Samsung Galaxy S21', '555-8765', '2024-11-2024', 30, 8, 3),
+('15 Apple iPhone 13', '555-8765', '2024-11-24', 15, 9, 3),
+('40 Sony SRS-XB43', '555-1234', '2024-11-24', 40, 10, 1),
+('25 MacBook Pro 13"', '555-5678', '2024-11-24', 25, 11, 2);
