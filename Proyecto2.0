@@ -299,3 +299,34 @@ VALUES
 ('MacBook Pro 13"', 'Laptop Apple MacBook Pro de 13 pulgadas con procesador M1', 1500.00, 25, 2, 11),
 ('Xiaomi Redmi Note 10', 'Smartphone Xiaomi Redmi Note 10 con pantalla AMOLED y 48MP de cámara', 2000.00, 8, 3, 12),
 ('Anker Soundcore', 'Parlante Bluetooth Anker Soundcore con sonido de 360° y batería de larga duración', 70.00, 60, 1, 13);
+
+
+
+
+
+*********Edicion de datos de Clientes*****************
+
+-- Actualizar los datos de la tabla Clientes
+UPDATE Clientes
+SET 
+    direccion = contacto,  -- Asignamos la información del contacto a la dirección
+    contacto = CASE  -- Cambiamos el valor de la columna contacto (correo a teléfono)
+        WHEN Nombre = 'Carlos Jiménez' THEN '123-456-7890'
+        WHEN Nombre = 'María Fernanda López' THEN '234-567-8901'
+        WHEN Nombre = 'José Antonio Pérez' THEN '345-678-9012'
+        WHEN Nombre = 'Ana Rodríguez' THEN '456-789-0123'
+        WHEN Nombre = 'Luis Torres' THEN '567-890-1234'
+        WHEN Nombre = 'Sofía Martínez' THEN '678-901-2345'
+        WHEN Nombre = 'Juan Carlos García' THEN '789-012-3456'
+        WHEN Nombre = 'Lucía Hernández' THEN '890-123-4567'
+        WHEN Nombre = 'Pedro Castillo' THEN '901-234-5678'
+        WHEN Nombre = 'Elena Díaz' THEN '012-345-6789'
+        ELSE contacto -- Si no se encuentra el nombre, dejamos el contacto original
+    END;
+
+
+Las 3 lineas de inicio las cambia con este: 
+
+UPDATE Clientes
+SET direccion = 'pedro.gomez@gmail.com'
+where idCliente = 3
