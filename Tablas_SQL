@@ -233,3 +233,62 @@ RETURN
     FROM productos
     WHERE cantidadStock < @umbral
 );
+
+
+
+****-----****VISTAS *---***---
+
+---Vista 1: Información de productos con su categoría
+
+CREATE VIEW vistaProductosCategorias
+AS
+SELECT 
+    p.idProductos, 
+    p.nombre AS NombreProducto, 
+    p.descripcion, 
+    p.precio, 
+    p.cantidadStock, 
+    c.nombre AS NombreCategoria
+FROM 
+    productos p
+INNER JOIN 
+    categorias c ON p.fkcategorias = c.idCategorias;
+SELECT * FROM vistaProductosCategorias;
+
+
+
+
+Vista 2: Detalle de ventas con clientes
+
+CREATE VIEW vistaVentasClientes
+AS
+SELECT 
+    v.idVentas, 
+    c.Nombre AS NombreCliente, 
+    v.contactoPrincipal, 
+    v.cantidad, 
+    v.precio AS PrecioUnitario, 
+    (v.cantidad * v.precio) AS TotalVenta
+FROM 
+    ventas v
+INNER JOIN 
+    clientes c ON v.fkCliente = c.idCliente;
+SELECT * FROM vistaVentasClientes;
+
+
+Vista 3: Compras realizadas por proveedores
+CREATE VIEW vistaComprasProveedores
+AS
+SELECT 
+    co.idCompras, 
+    co.productosAdqui AS ProductosAdquiridos, 
+    co.cantidad AS CantidadComprada, 
+    co.costo AS CostoUnitario, 
+    (co.cantidad * co.costo) AS CostoTotal, 
+    p.nombre AS NombreProveedor
+FROM 
+    compras co
+INNER JOIN 
+    proveedores p ON co.fkProveedores = p.idProveedores;
+
+SELECT * FROM vistaComprasProveedores;
