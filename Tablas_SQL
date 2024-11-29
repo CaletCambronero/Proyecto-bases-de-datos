@@ -187,3 +187,49 @@ End
 
 
 execute AgregarProductos 'Laptop', 'Laptop de alto rendimiento', 1500, 10
+
+
+
+*-*-*-*-*-*-*-FUNCIONES  *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*----*-*-*-*-*-*-*-
+
+--Función escalar 1: Calcular el valor total de una venta
+--Calcula el valor total de una venta multiplicando la cantidad por el precio.
+
+CREATE FUNCTION calcularTotalVenta(@idVenta INT)
+RETURNS DECIMAL(10, 2)
+AS
+BEGIN
+    DECLARE @total DECIMAL(10, 2);
+    SELECT @total = cantidad * precio
+    FROM ventas
+    WHERE idVentas = @idVenta;
+    RETURN @total;
+END;
+-- Calcular el total de una venta
+SELECT dbo.calcularTotalVenta(1);
+
+--Función escalar 2: Obtener la cantidad de stock de un producto
+CREATE FUNCTION obtenerStockProducto(@idProducto INT)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @stock INT;
+    SELECT @stock = cantidadStock
+    FROM productos
+    WHERE idProductos = @idProducto;
+    RETURN @stock;
+END;
+-- Consultar el stock de un producto
+SELECT dbo.obtenerStockProducto(5);
+
+--Función de tipo tabla: Productos con bajo stock
+
+CREATE FUNCTION productosBajoStock(@umbral INT)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT idProductos, nombre, cantidadStock
+    FROM productos
+    WHERE cantidadStock < @umbral
+);
